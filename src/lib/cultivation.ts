@@ -370,7 +370,7 @@ export function qiRate(s: GameState, now: number): number {
   const stage = stageIndex(s);
   const base = 1 + stage * 0.9 + Math.pow(stage, 1.75) * 0.12;
   const art = 1 + (artifactOf(s.equipped)?.mult ?? 0);
-  const man = 1 + (manualOf(s.equippedManual)?.qiMult ?? 0);
+  const man = 1 + manualsQiBonus(s.manuals);
   const buff = now < s.buffUntil ? 2 : 1;
   const destiny = destinyQiMult(s.destinySeed, s.realm);
   const rootMult = rootQiMult(s.root);
@@ -391,7 +391,7 @@ export function breakthroughChance(s: GameState): number {
   const major = isMajor(s);
   let c = (major ? 0.55 : 0.92) - stage * 0.012;
   c += artifactOf(s.equipped)?.luck ?? 0;
-  c += manualOf(s.equippedManual)?.luck ?? 0;
+  c += manualsLuckBonus(s.manuals);
   c += Math.min(0.2, s.failures * 0.05);
   c += destinyLuck(s.destinySeed, s.realm);
   if (s.pills.phacanh > 0) c += 0.25;
