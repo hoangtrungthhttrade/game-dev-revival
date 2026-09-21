@@ -8,6 +8,8 @@ import {
   HERBS,
   HerbId,
   MANUALS,
+  manualsQiBonus,
+  manualsLuckBonus,
   PILLS,
   PillId,
   REALMS,
